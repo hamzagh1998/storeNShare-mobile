@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import { ThemeProvider } from "styled-components/native";
+import { Lato_400Regular, useFonts } from '@expo-google-fonts/lato';
+import { Cabin_400Regular } from "@expo-google-fonts/cabin";
+import { UserContextProvider } from "./src/context/user.context";
+import axios from "axios";
+
+import { theme } from "./src/infrastructure/theme";
+
+import { Nvaigation } from "./src/infrastructure/navigations";
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [latoLoaded] = useFonts({Lato_400Regular});
+  const [cabindLoaded] = useFonts({Cabin_400Regular});
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if (!cabindLoaded || !latoLoaded) return null;
+
+  const themes = {...theme, colors: theme.light};
+
+  axios.defaults.baseURL = "http://192.168.180.34:4000/api/v1"
+  
+  return (
+    <>
+      <ThemeProvider theme={themes}>
+        <UserContextProvider>
+         <Nvaigation />
+        </UserContextProvider>
+      </ThemeProvider>
+      <ExpoStatusBar style="auto" />
+    </>
+  );
+};
