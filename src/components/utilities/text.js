@@ -47,6 +47,11 @@ const success = theme => `
   color: ${theme.colors.text.success};
 `;
 
+const cover = theme => `
+  font-size: ${theme.fontSizes.h5};
+  font-weight: ${theme.fontWeights.bold};
+`;
+
 const variants = {
   title,
   body,
@@ -55,6 +60,7 @@ const variants = {
   error,
   hint,
   success,
+  cover
 };
 
 export const Text = styled.Text`

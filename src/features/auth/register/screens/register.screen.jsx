@@ -34,7 +34,11 @@ export function RegisterScreen({ navigation }) {
       return setError("Two passwords didn't match!");
     };setError(null);
 
-      const [err, data] = await tryToCatch(registerService, username, email, password);
+      const [err, data] = await tryToCatch(
+        registerService, 
+        username.toLocaleLowerCase().trim(), 
+        email.toLocaleLowerCase().trim(), 
+        password);
       if (err) {
         setError(err);
         setIsLoading(false);

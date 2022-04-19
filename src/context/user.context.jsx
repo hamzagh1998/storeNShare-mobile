@@ -8,11 +8,10 @@ export const UserContext = createContext();
 export function UserContextProvider({ children }) {
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const getToken = async () => {
-    setIsLoading(true);
     const [error, data] = await tryToCatch(await AsyncStorage.getItem, "@token");
     if (error) {
       setError(error);
@@ -22,7 +21,6 @@ export function UserContextProvider({ children }) {
   };
 
   const getUserData = async () => {
-    setIsLoading(true);
     const [error, data] = await tryToCatch(await AsyncStorage.getItem, "@userData");
     if (error) {
       setError(error);

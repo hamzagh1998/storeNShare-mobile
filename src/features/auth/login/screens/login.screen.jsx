@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import { UserContext } from "../../../../context/user.context";
 
-import { LoginComponents } from "../components/login.components";
+import { LoginComponent } from "../components/login.component";
 
 import { LoadingIndicator } from "../../../../components/loading-indicator/loading-indicator";
 
@@ -31,7 +31,7 @@ export function LoginScreen({ navigation }) {
       setIsLoading(false);
       return setError("Password must contain at least 6 character!");
     };setError(null);
-    const [err, data] = await tryToCatch(loginService, emailOrUsername, password);
+    const [err, data] = await tryToCatch(loginService, emailOrUsername.toLocaleLowerCase().trim(), password);
     if (err) {
       setError(err);
       setIsLoading(false);
@@ -50,7 +50,7 @@ export function LoginScreen({ navigation }) {
       {
         isLoading 
           ? <LoadingIndicator />
-          : <LoginComponents 
+          : <LoginComponent 
               emailOrUsername={emailOrUsername}
               password={password}
               isLoading={isLoading}

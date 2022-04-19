@@ -1,15 +1,15 @@
 import React from "react";
 import { Pressable } from "react-native";
 
-import { ScrollView, LoginForm, CustemInput } from "./styles";
+import { ScrollView, LoginForm } from "./styles";
 
 import { Spacer } from "../../../../components/spacer/spacer";
 
-import { ViewContainer, Text, Image, Button } from "../../../../components/utilities";
+import { ViewContainer, Text, TextInput, Image, Button } from "../../../../components/utilities";
 
 import Logo from "../../../../../assets/icon.png";
 
-export function LoginComponents({emailOrUsername, password, error, setEmailOrUsername, setPassword, onLogin, onRegister}) {
+export function LoginComponent({emailOrUsername, password, error, setEmailOrUsername, setPassword, onLogin, onRegister}) {
   return (
     <ViewContainer>
       <Spacer size="xxl">
@@ -19,7 +19,7 @@ export function LoginComponents({emailOrUsername, password, error, setEmailOrUse
       <ScrollView>
         <LoginForm>
           <Spacer size="xl">
-            <CustemInput
+            <TextInput
               label="Email Or Username"
               value={emailOrUsername}
               placeholder="Enter your email or username"
@@ -28,7 +28,7 @@ export function LoginComponents({emailOrUsername, password, error, setEmailOrUse
             />
           </Spacer>
           <Spacer size="large">
-            <CustemInput 
+            <TextInput 
               label="Password"
               value={password}
               placeholder="Enter your password"

@@ -1,6 +1,4 @@
 import styled from "styled-components/native";
-import { TextInput } from "react-native-paper";
-
 
 export const LoginForm = styled.View`
   flex: 1;
@@ -12,7 +10,3 @@ export const ScrollView = styled.ScrollView`
   width: 100%;
 `;
 
-export const CustemInput = styled(TextInput)`
-  height: 60px;
-  width: 100%;
-`;

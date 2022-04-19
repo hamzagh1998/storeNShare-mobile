@@ -5,6 +5,7 @@ import { LoginScreen } from "../../features/auth/login/screens/login.screen";
 import { RegisterScreen } from "../../features/auth/register/screens/register.screen";
 
 
+
 export function AuthNavigator() {
   const AuthStackNavigator = createNativeStackNavigator();
 
@@ -13,14 +14,14 @@ export function AuthNavigator() {
       screenOptions={{headerBackButtonMenuEnabled: true}}
     >
       <AuthStackNavigator.Screen 
-        options={{headerShown: false}}
         name="Login" 
         component={LoginScreen} 
+        options={{headerShown: false}}
       />
       <AuthStackNavigator.Screen 
-        options={{headerShown: false}}
         name="Register" 
         component={RegisterScreen} 
+        options={{headerShown: false}}
       />
     </AuthStackNavigator.Navigator>
   );

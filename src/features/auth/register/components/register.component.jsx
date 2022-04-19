@@ -1,11 +1,11 @@
 import React from "react";
 import { Pressable } from "react-native";
 
-import { ScrollView, RegisterForm, CustemInput } from "./styles";
+import { ScrollView, RegisterForm } from "./styles";
 
 import { Spacer } from "../../../../components/spacer/spacer"
 
-import { ViewContainer, Text, Image, Button } from "../../../../components/utilities";
+import { ViewContainer, Text, TextInput, Image, Button } from "../../../../components/utilities";
 
 import Logo from "../../../../../assets/icon.png";
 
@@ -20,25 +20,25 @@ export function RegisterComponent({userData, error, setUserData, onRegister, onL
       <ScrollView>
         <RegisterForm>
           <Spacer size="large">
-            <CustemInput
+            <TextInput
               label="Username"
               value={userData.username}
               placeholder="Enter your username"
               autoCapitalize="none"
-              onChangeText={value => setUserData({...userData, username: value.toLocaleLowerCase().trim()})}
+              onChangeText={value => setUserData({...userData, username: value})}
             />
           </Spacer>
           <Spacer size="large">
-            <CustemInput
+            <TextInput
               label="Email"
               value={userData.email}
               placeholder="Enter your email"
               autoCapitalize="none"
-              onChangeText={value => setUserData({...userData, email: value.toLocaleLowerCase().trim()})}
+              onChangeText={value => setUserData({...userData, email: value})}
             />
           </Spacer>
           <Spacer size="large">
-            <CustemInput 
+            <TextInput 
               label="Password"
               value={userData.password}
               placeholder="Enter your password"
@@ -48,7 +48,7 @@ export function RegisterComponent({userData, error, setUserData, onRegister, onL
             />
           </Spacer>
           <Spacer size="large">
-            <CustemInput 
+            <TextInput 
               label="Confirm Password"
               value={userData.confirmPassword}
               placeholder="Enter your password"
