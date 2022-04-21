@@ -4,6 +4,7 @@ import { tryToCatch } from "../utils/try-to-catch";
 import { requestHandler } from "../utils/request-handler";
 
 export class Cluster {
+
   static async myCluster(token) {
     const [error, res] = await tryToCatch(async token => (
       axios.get("/cluster/my", {headers: {Authorization: "Bearer "+token}})
@@ -45,4 +46,5 @@ export class Cluster {
       ), token);
       return requestHandler(error, res);
   };
+  
 };

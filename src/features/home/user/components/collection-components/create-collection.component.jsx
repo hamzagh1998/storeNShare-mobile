@@ -1,19 +1,20 @@
 import React from "react";
-import { Switch } from 'react-native-paper';
+import { Switch } from "react-native-paper";
 
-import { MainContainer, CreateClusterContainer, RowContainer, FormContainer } from "./styles";
 
-import { Spacer } from "../../../../components/spacer/spacer";
-import { ViewContainer, Text, TextInput, Button } from "../../../../components/utilities";
+import { MainContainer, Container, RowContainer, FormContainer } from "../styles";
 
-export function CreateClusterComponent({name, shared, error, setName, setShared, onCreate}) {
+import { Spacer } from "../../../../../components/spacer/spacer";
+import { ViewContainer, Text, TextInput, Button } from "../../../../../components/utilities";
+
+export function CreateCollectionComponent({name, shared, error, setName, setShared, onCreateCollection}) {
   
   return (
     <ViewContainer>
       <Spacer size="xxl" />
-      <Text variant="cover">Create new Cluster</Text>
+      <Text variant="cover">Create New Collection</Text>
       <MainContainer>
-        <CreateClusterContainer>
+        <Container>
           <RowContainer>
             <Text variant="label">Public:</Text>
             <Switch value={shared} onValueChange={() => setShared(!shared)} />
@@ -21,19 +22,19 @@ export function CreateClusterComponent({name, shared, error, setName, setShared,
           <Spacer size="xl" />
           <FormContainer>
             <TextInput 
-              label="Cluster name"
-              placeholder="Enter cluster name"
+              label="Collection name"
+              placeholder="Enter Collection name"
               value={name}
               autoCapitalize="none"
               onChangeText={value => setName(value)}
             />
             <Spacer />
-            <Button icon="content-save" mode="contained" onPress={() => onCreate()}>
+            <Button icon="content-save" mode="contained" onPress={() => onCreateCollection()}>
               Save!
             </Button>
             <Text variant="error">{ error }</Text>
           </FormContainer>
-        </CreateClusterContainer>
+        </Container>
       </MainContainer>
     </ViewContainer>
   );

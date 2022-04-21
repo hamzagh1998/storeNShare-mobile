@@ -1,8 +1,9 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { UserScreen } from "../../features/home/user/screens/user.screen";
-import { CreateClusterScreen } from "../../features/home/user/screens/create-cluster.screen";
+import { UserClusterDetailScreen } from "../../features/home/user/screens/user-cluster-detail.screen";
+import { CreateClusterScreen } from "../../features/home/user/screens/cluster-screens/create-cluster.screen";
+import { CreateCollectionScreen } from "../../features/home/user/screens/collection-screens/create-collection.screen"
 
 
 export function ClusterNavigatior() {
@@ -14,12 +15,16 @@ export function ClusterNavigatior() {
     >
       <ClusterStackNavigator.Screen 
         name="My Cluster" 
-        component={UserScreen} 
+        component={UserClusterDetailScreen} 
         options={{headerShown: false}}
       />
       <ClusterStackNavigator.Screen 
-        name="Create Cluster" 
+        name="Create cluster" 
         component={CreateClusterScreen} 
+      />
+      <ClusterStackNavigator.Screen 
+        name="Create collection" 
+        component={CreateCollectionScreen} 
       />
     </ClusterStackNavigator.Navigator>
   );

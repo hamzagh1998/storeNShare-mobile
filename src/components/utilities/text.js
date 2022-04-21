@@ -21,6 +21,13 @@ const body = theme => `
     font-size: ${theme.fontSizes.body};
 `;
 
+const link = theme => `
+    font-family: ${theme.fonts.body};
+    font-size: ${theme.fontSizes.body};
+    color: #0c9bdc
+`;
+
+
 const hint = theme => `
     font-size: ${theme.fontSizes.body};
 `;
@@ -52,15 +59,21 @@ const cover = theme => `
   font-weight: ${theme.fontWeights.bold};
 `;
 
+const tiny = theme => `
+  font-size: ${theme.fontSizes.tiny};
+`;
+
 const variants = {
   title,
   body,
+  link,
   label,
   caption,
   error,
   hint,
   success,
-  cover
+  cover,
+  tiny
 };
 
 export const Text = styled.Text`

@@ -7,7 +7,7 @@ export const MainContainer = styled.View`
   align-items: center;
 `;
 
-export const CreateClusterContainer = styled.View`
+export const Container = styled.View`
   flex: 1;
   width: 100%;
   align-items: center;

@@ -1,21 +1,21 @@
-import { Cluster } from "../../api/cluster";
+import { Collection } from "../../api/collection";
 
 import { tryToCatch } from "../../utils/try-to-catch";
 
-export class ClusterServie {
+export class CollectionService {
 
-  static async myClusterService(token) {
-    const [error, data] = await tryToCatch(Cluster.myCluster, token);
+  static async createCollectionService(token, payload) {
+    const [error, data] = await tryToCatch(Collection.createCollection, token, payload);
     if (error) return { error: true, detail: error};
     if (data.error) return { error: true, detail: data.detail};
     return { error: false, detail: data.detail};
   };
 
-  static async createClusterService(token, payload) {
-    const [error, data] = await tryToCatch(Cluster.createCluster, token, payload);
+  static async deleteCollectionService(token, collectionId) {
+    const [error, data] = await tryToCatch(Collection.deleteCollection, token, collectionId);
     if (error) return { error: true, detail: error};
     if (data.error) return { error: true, detail: data.detail};
     return { error: false, detail: data.detail};
   };
-  
+
 };

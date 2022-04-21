@@ -10,6 +10,7 @@ export const fontWeights = {
 };
 
 export const fontSizes = {
+  tiny: "10px",
   caption: "12px",
   button: "14px",
   body: "16px",
