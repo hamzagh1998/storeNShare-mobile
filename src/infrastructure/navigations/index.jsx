@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { AuthNavigator } from "./auth.navigator";
-import { HomeNavigation } from "./home.navigation"
+import { HomeNavigator } from "./home.navigator"
 
 import { UserContext } from "../../context/user.context";
 
@@ -11,7 +11,7 @@ import { SafeAreaContainer } from "../../components/utilities";
 
 export function Nvaigation() {
   const { token, isLoading } = useContext(UserContext);
-  const CurrentNavigation = () => token ? <HomeNavigation /> : <AuthNavigator />
+  const CurrentNavigation = () => token ? <HomeNavigator /> : <AuthNavigator />
 
   return (
     <NavigationContainer>

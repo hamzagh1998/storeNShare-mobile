@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useIsFocused } from '@react-navigation/native';
-import { Button } from "react-native-paper";
 
 import { UserContext } from "../../../../context/user.context";
 
@@ -25,10 +24,31 @@ export function UserClusterDetailScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const createNew = async (name, clusterId=null) => navigation.navigate("Create "+name, {clusterId});
-  const updateCollection = () => {
-
+  const createNew = async (name, id=null) => {
+    if (name === "collection") {
+      navigation.navigate(
+        "Collection",
+        {
+          screen: "Create collection",
+          params: {id}
+        }
+      )
+    } else {
+      navigation.navigate("Create "+name, {id})
+    };
   };
+  const updateCollection = params => navigation.navigate(
+    "Collection", 
+    {
+      screen: "Update collection", 
+      params: params
+    });
+  const onCollectionDetail = params => navigation.navigate(
+    "Collection", 
+    {
+      screen: "My collection detail", 
+      params: params
+    });
   const deleteCollection = async collectionId => {
     setIsLoading(true);
     const [error, data] = await tryToCatch(CollectionService.deleteCollectionService, token, collectionId);
@@ -43,7 +63,7 @@ export function UserClusterDetailScreen({ navigation }) {
         setError(null);
         setIsLoading(false);
       };
-    }; setreload(!reload);
+    };setreload(true);
     navigation.navigate("My Cluster");
   };
 
@@ -65,13 +85,14 @@ export function UserClusterDetailScreen({ navigation }) {
         };
       };
       mounted && setIsLoading(false);
+      mounted && setreload(false);
     };
 
     loadData();
     // clean up
     return () => mounted = false;
-  } ,[isFocused, myClusterData.collections.length, error, reload]);
-
+  } ,[isFocused, error, reload]);
+  
   return (
     <>
       {
@@ -80,6 +101,7 @@ export function UserClusterDetailScreen({ navigation }) {
           : <ClusterDetailComponent 
               myClusterData={myClusterData} 
               createNew={createNew} 
+              onCollectionDetail={onCollectionDetail}
               updateCollection={updateCollection}
               deleteCollection={deleteCollection}
             />

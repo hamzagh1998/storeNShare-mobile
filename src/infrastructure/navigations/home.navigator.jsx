@@ -9,7 +9,7 @@ import { MainScreen } from "../../features/home/main/screens/main.screen";
 import { SettingsScreen } from "../../features/home/settings/screens/settings.screen";
 
 
-export function HomeNavigation() {
+export function HomeNavigator() {
   const HomeTabNavigation = createBottomTabNavigator();
 
   const theme = useTheme();

@@ -2,31 +2,33 @@ import React, { useState, useContext } from "react";
 
 import { UserContext } from "../../../../../context/user.context";
 
-import { CreateCollectionComponent } from "../../components/collection-components/create-collection.component";
+import { UpdateCollectionComponent } from "../../components/collection-components/update-collection.component"
 
 import { LoadingIndicator } from "../../../../../components/loading-indicator/loading-indicator";
 
+import { tryToCatch }from "../../../../../utils/try-to-catch";
+
 import { CollectionService } from "../../../../../services/collection/collectoin.service";
 
-import { tryToCatch } from "../../../../../utils/try-to-catch";
 
-export function CreateCollectionScreen({ route, navigation }) {
+export function UpdateCollectionScreen({ route, navigation }) {
 
-  const { id } = route.params;
+
+  const { collectionId, oldName, oldShared } = route.params;
 
   const { token } = useContext(UserContext);
 
-  const [name, setName] = useState('');
-  const [shared, setShared] = useState(true);
+  const [name, setName] = useState(oldName);
+  const [shared, setShared] = useState(oldShared);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const onCreateCollection = async () => {
+  const onUpdateCollection = async () => {
     setIsLoading(true);
     if (name.length) {
-      const [error, data] = await tryToCatch(async (token, payload) => (
-        CollectionService.createCollectionService(token, payload)
-      ), token, {collectionInfo: {clusterParent: id, name: name.toLowerCase().trim(), shared}});
+      const [error, data] = await tryToCatch(async (token, collectionId, payload) => (
+        CollectionService.updateCollectionService(token, collectionId, payload)
+      ), token, collectionId, {collectionInfo: {name: name.toLowerCase().trim(), shared}});
       if (error) {
         setError(error);
       }; if (data) {
@@ -35,24 +37,25 @@ export function CreateCollectionScreen({ route, navigation }) {
           setIsLoading(false);
         } else navigation.navigate("My Cluster");
       }; 
-    } else setError("Please enter a collection name!");
+    } else setError("Please enter collection name!");
     setIsLoading(false);
   };
 
   return (
     <>
       {
-        isLoading
+        isLoading 
           ? <LoadingIndicator />
-          : <CreateCollectionComponent 
+          : <UpdateCollectionComponent 
               name={name}
               shared={shared}
               error={error}
               setName={setName}
               setShared={setShared}
-              onCreateCollection={onCreateCollection}
+              onUpdateCollection={onUpdateCollection}            
             />
       }
     </>
   );
 };
+ 

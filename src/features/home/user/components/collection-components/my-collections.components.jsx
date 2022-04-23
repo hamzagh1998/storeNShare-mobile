@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, ScrollView } from 'react-native';
 import { Button } from "react-native-paper";
-import { FontAwesome5 } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import { MainContainer, RowContainer, CollectionBox, InfoContainer } from "./collection.styles";
 
@@ -9,34 +9,36 @@ import { Spacer } from "../../../../../components/spacer/spacer";
 import { Dialog } from "../../../../../components/dialogue/dialog";
 import { Text, Searchbar, AddBox } from "../../../../../components/utilities";
 
-export function MyCollectionsComponents({ clusterParent, collections, createNew, updateCollection, deleteCollection }) {
-  
+export function MyCollectionsComponents({ clusterParent, collections, createNew, onCollectionDetail, updateCollection, deleteCollection }) {
+
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchRslt, setShearchRslt] = useState(collections);
+  const [searchRslt, setShearchRslt] = useState([]);
   const [showDialog, setShowDialog] = useState(false);
   const [collectionId, setCollectionId] = useState(null);
 
-  
-  useEffect(() => setShearchRslt(collections), [collections.length]);
+  useEffect(() => setShearchRslt([]), [!searchQuery.length, collections.length]);
 
-  const onSearch = value => {
-    setSearchQuery(value);
+  const onSubmitSearch = () => {
     setShearchRslt(collections.filter(collection => 
-      collection.name.includes(value.toLocaleLowerCase().trim())
+      collection.name.includes(searchQuery.toLocaleLowerCase().trim())
     ));
   };
 
   const collectionList = [];
   let row = [];
 
-  searchRslt.forEach(collection => {
-    if (row.length === 2) {
-      collectionList.push(row);
-      row = [];
-    };row.push(collection);
-  });collectionList.push(row);
-  if (collectionList[collectionList.length - 1].length === 1) collectionList[collectionList.length - 1].push({name: ''});
-  else collectionList.push([{name: ''}]);
+  const fillCollectionList = arr => {
+    arr.forEach(collection => {
+      if (row.length === 2) {
+        collectionList.push(row);
+        row = [];
+      };row.push(collection);
+    });collectionList.push(row);
+    if (collectionList[collectionList.length - 1].length === 1) collectionList[collectionList.length - 1].push({name: ''});
+    else collectionList.push([{name: ''}]);
+  };
+
+  !searchRslt.length ? fillCollectionList(collections) : fillCollectionList(searchRslt);
 
   const DeleteButton = <Button 
     width="50%" 
@@ -66,7 +68,8 @@ export function MyCollectionsComponents({ clusterParent, collections, createNew,
         <Searchbar
           placeholder="Search for collection"
           autoCapitalize="none"
-          onChangeText={value => onSearch(value)}
+          onChangeText={value => setSearchQuery(value)}
+          onSubmitEditing={onSubmitSearch}
           value={searchQuery} 
         />
         <Spacer position="bottom" size="xl" />
@@ -78,7 +81,12 @@ export function MyCollectionsComponents({ clusterParent, collections, createNew,
             {
               collectionArr.map(collectionObj => (
                 collectionObj.name.length
-                  ?(<CollectionBox key={collectionObj._id} onPress={() => null}>
+                  ?(<CollectionBox key={collectionObj._id} onPress={() => onCollectionDetail(
+                    {
+                      collectionId: collectionObj._id, 
+                      name: collectionObj.name
+                    }
+                    )}>
                       <RowContainer>
                         <TouchableOpacity 
                           style={{width: "50%"}} 
@@ -90,7 +98,16 @@ export function MyCollectionsComponents({ clusterParent, collections, createNew,
                           <FontAwesome5 name="trash" size={20} color="#f55" />
                         </TouchableOpacity>   
                         <Spacer position="left" size="xl" />   
-                        <TouchableOpacity onPress={() => console.log("Edit")}>
+                        <TouchableOpacity 
+                          onPress={async () => {
+                            await updateCollection(
+                              {
+                                collectionId: collectionObj._id,
+                                oldName: collectionObj.name, 
+                                oldShared: collectionObj.shared
+                              });
+                          }}
+                        >
                           <FontAwesome5 name="edit" size={20} color="#7ed1d9" /> 
                         </TouchableOpacity>   
                       </RowContainer>

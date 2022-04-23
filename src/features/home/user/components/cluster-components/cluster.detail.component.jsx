@@ -6,7 +6,7 @@ import { DontHaveComponent } from "../dont-have.component"
 import { ViewContainer } from "../../../../../components/utilities";
 
 
-export function ClusterDetailComponent({ myClusterData, createNew, updateCollection, deleteCollection }) {
+export function ClusterDetailComponent({ myClusterData, createNew, onCollectionDetail, updateCollection, deleteCollection }) {
 
   const currentView = myClusterData.collections 
                         ? myClusterData.collections.length
@@ -14,11 +14,12 @@ export function ClusterDetailComponent({ myClusterData, createNew, updateCollect
                               clusterParent={myClusterData._id}
                               collections={myClusterData.collections} 
                               createNew={createNew}
+                              onCollectionDetail={onCollectionDetail}
                               updateCollection={updateCollection}
                               deleteCollection={deleteCollection}
                             />
                           : <DontHaveComponent 
-                              myClusterData={myClusterData}
+                              id={myClusterData._id}
                               name="collection" 
                               createNew={createNew} 
                             />
