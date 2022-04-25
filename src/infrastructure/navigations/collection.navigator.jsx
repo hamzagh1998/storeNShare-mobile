@@ -25,7 +25,7 @@ export function CollectionNavigator() {
       <CollectionStackNavigator.Screen 
         name="My collection detail" 
         component={MyCollectionDetailScreen} 
-        options={({ route }) => ({ title: route.params.name })}
+        options={({ route }) => ({ title: route.params.name + " lists" })}
       />
       <CollectionStackNavigator.Screen 
         name="List"

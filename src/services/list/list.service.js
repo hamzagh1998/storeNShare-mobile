@@ -11,4 +11,18 @@ export class ListService {
     return { error: false, detail: data.detail};
   };
 
+  static async updateListService(token, listId, payload) {
+    const [error, data] = await tryToCatch(List.updateList, token, listId, payload);
+    if (error) return { error: true, detail: error};
+    if (data.error) return { error: true, detail: data.detail};
+    return { error: false, detail: data.detail};
+  };
+
+  static async deleteListService(token, listId) {
+    const [error, data] = await tryToCatch(List.deleteList, token, listId);
+    if (error) return { error: true, detail: error};
+    if (data.error) return { error: true, detail: data.detail};
+    return { error: false, detail: data.detail};
+  };
+
 };

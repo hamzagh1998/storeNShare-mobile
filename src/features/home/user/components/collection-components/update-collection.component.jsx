@@ -1,6 +1,6 @@
-import Reat from "react";
+import React from "react";
+import { View } from "react-native";
 import { Switch } from "react-native-paper";
-
 
 import { MainContainer, Container, RowContainer, FormContainer } from "../styles";
 
@@ -30,10 +30,12 @@ export function UpdateCollectionComponent({name, shared, error, setName, setShar
               onChangeText={value => setName(value)}
             />
             <Spacer />
+            <View style={{width: "100%"}}>
+              <Text variant="error">{ error }</Text>
+            </View>
             <Button icon="content-save" mode="contained" onPress={() => onUpdateCollection()}>
               Update!
             </Button>
-            <Text variant="error">{ error }</Text>
           </FormContainer>
         </Container>
       </MainContainer>

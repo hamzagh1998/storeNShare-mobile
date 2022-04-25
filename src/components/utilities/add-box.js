@@ -5,7 +5,7 @@ const TouchableOpacity = styled.TouchableOpacity`
   width: 50%;
 `;
 
-export const AddButton = styled.View`
+export const AddBtnContainer = styled.View`
   margin: 5px;
   min-height: 130px;
   align-items: center;
@@ -19,9 +19,9 @@ export function AddBox({bgColor1, bgColor2, onPress}) {
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <AddButton bgColor1={bgColor1}>
+      <AddBtnContainer bgColor1={bgColor1}>
         <Avatar.Icon size={80} icon="plus" backgroundColor={bgColor2} />
-      </AddButton>
+      </AddBtnContainer>
     </TouchableOpacity>
-  )
-}
+  );
+};

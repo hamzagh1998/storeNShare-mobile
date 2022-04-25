@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { Switch } from "react-native-paper";
 
 
@@ -29,10 +30,12 @@ export function CreateCollectionComponent({name, shared, error, setName, setShar
               onChangeText={value => setName(value)}
             />
             <Spacer />
+            <View style={{width: "100%"}}>
+              <Text variant="error">{ error }</Text>
+            </View>
             <Button icon="content-save" mode="contained" onPress={() => onCreateCollection()}>
               Save!
             </Button>
-            <Text variant="error">{ error }</Text>
           </FormContainer>
         </Container>
       </MainContainer>

@@ -24,7 +24,7 @@ export function ListNavigator() {
       <ListStackNavigator.Screen 
         name="My list detail" 
         component={MyListDetailScreen} 
-        options={({ route }) => ({ title: route.params.name })}
+        options={({ route }) => ({ title: route.params.name + " items" })}
       />
     </ListStackNavigator.Navigator>
   );

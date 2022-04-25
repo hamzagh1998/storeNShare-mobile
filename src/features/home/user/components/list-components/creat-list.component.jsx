@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import { Switch } from "react-native-paper";
 
 
@@ -22,17 +23,19 @@ export function CreateListComponent({name, shared, error, setName, setShared, on
           <Spacer size="xl" />
           <FormContainer>
             <TextInput 
-              label="Collection name"
-              placeholder="Enter Collection name"
+              label="List name"
+              placeholder="Enter List name"
               value={name}
               autoCapitalize="none"
               onChangeText={value => setName(value)}
             />
             <Spacer />
+            <View style={{width: "100%"}}>
+              <Text variant="error">{ error }</Text>
+            </View>
             <Button icon="content-save" mode="contained" onPress={() => onCreateList()}>
               Save!
             </Button>
-            <Text variant="error">{ error }</Text>
           </FormContainer>
         </Container>
       </MainContainer>

@@ -13,7 +13,7 @@ import { ListService } from "../../../../../services/list/list.service";
 
 export function CreatListScreen({ route, navigation }) {
 
-  const { id } = route.params; // collection id
+  const { id, parentName } = route.params; // collection id
 
   const { token } = useContext(UserContext);
 
@@ -34,7 +34,7 @@ export function CreatListScreen({ route, navigation }) {
         if (data.error) {
           setError(data.detail.toString());
           setIsLoading(false);
-        } else navigation.navigate("Collection", {screen: "My collection detail"});
+        } else navigation.navigate("Collection", {screen: "My collection detail", params: {collectionId: id, name: parentName}});
       }; 
     } else setError("Please enter a list name!");
     setIsLoading(false);

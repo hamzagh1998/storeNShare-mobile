@@ -9,6 +9,7 @@ export const MainContainer = styled.View`
 export const RowContainer = styled.View`
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   width: 100%;
   opacity: ${({visible}) => visible ? 0.5 : 1};
 `;

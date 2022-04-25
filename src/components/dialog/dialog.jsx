@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import { AntDesign } from '@expo/vector-icons';
 
@@ -45,7 +45,7 @@ const ButtonsConatiner = styled.View`
   flex: 1;
 `;
 
-export function Dialog({ visible = false, onClose, title, content, bottons }) {
+export function Dialog({ visible = false, onClose, title, content, buttons }) {
 
   return (
     <>
@@ -63,7 +63,7 @@ export function Dialog({ visible = false, onClose, title, content, bottons }) {
           </TextContainer>
           <ButtonsConatiner>
             <HorizontalView>
-              {bottons.map(button => button)}
+              {buttons.map(button => button)}
             </HorizontalView>
           </ButtonsConatiner>
         </DialogConatiner>

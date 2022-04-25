@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { TouchableOpacity, ScrollView } from 'react-native';
-import { Button } from "react-native-paper";
 import { FontAwesome5 } from '@expo/vector-icons';
+
+import { UserContext } from "../../../../../context/user.context";
 
 import { MainContainer, RowContainer, CollectionBox, InfoContainer } from "./collection.styles";
 
-import { Spacer } from "../../../../../components/spacer/spacer";
-import { Dialog } from "../../../../../components/dialogue/dialog";
-import { Text, Searchbar, AddBox } from "../../../../../components/utilities";
+import { DeleteButton, CancelButton } from "../../../../generic-components/dialog-buttons";
 
-export function MyCollectionsComponents({ clusterParent, collections, createNew, onCollectionDetail, updateCollection, deleteCollection }) {
+import { Spacer } from "../../../../../components/spacer/spacer";
+import { Dialog } from "../../../../../components/dialog/dialog";
+import { Text, Searchbar, AddBox, Image } from "../../../../../components/utilities";
+
+
+export function MyCollectionsComponents({ clusterParent, collections, createNew, onCollectionDetail, onUpdateCollection, onDeleteCollection }) {
+
+  const { userData: { avatar } } = useContext(UserContext);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [searchRslt, setShearchRslt] = useState([]);
   const [showDialog, setShowDialog] = useState(false);
   const [collectionId, setCollectionId] = useState(null);
 
-  useEffect(() => setShearchRslt([]), [!searchQuery.length, collections.length]);
+  useEffect(() => setShearchRslt([]), [searchQuery.length, collections.length]);
 
   const onSubmitSearch = () => {
     setShearchRslt(collections.filter(collection => 
@@ -40,29 +46,14 @@ export function MyCollectionsComponents({ clusterParent, collections, createNew,
 
   !searchRslt.length ? fillCollectionList(collections) : fillCollectionList(searchRslt);
 
-  const DeleteButton = <Button 
-    width="50%" 
-    style={{marginRight: 5, justifyContent: "center"}}
-    mode="contained"
-    icon="delete"
-    compact={true}
-    color="#f55"
-    onPress={() => deleteCollection(collectionId)}
-  >Delete</Button>;
-
-  const CancelButton = <Button 
-    width="50%" 
-    style={{justifyContent: "center"}}
-    mode="contained"
-    icon="cancel"
-    compact={true}
-    color="#7ed1d9"
-    onPress={() => setShowDialog(false)}
-  >Cancel</Button>;
-
   return (
     <>
-      <Text variant="label">Your Collections</Text>
+      <Spacer size="large" />
+      <RowContainer>
+        <Image source={{uri: avatar}} width={34} height={34} />
+        <Spacer position="right" size="medium" />
+        <Text variant="label">Your Collections</Text>
+      </RowContainer>
       <MainContainer visible={showDialog}>
         <Spacer position="bottom" size="large" />
         <Searchbar
@@ -100,7 +91,7 @@ export function MyCollectionsComponents({ clusterParent, collections, createNew,
                         <Spacer position="left" size="xl" />   
                         <TouchableOpacity 
                           onPress={async () => {
-                            await updateCollection(
+                            await onUpdateCollection(
                               {
                                 collectionId: collectionObj._id,
                                 oldName: collectionObj.name, 
@@ -117,7 +108,13 @@ export function MyCollectionsComponents({ clusterParent, collections, createNew,
                       </Text>
                       <InfoContainer>
                         <Text variant="tiny">lists: { collectionObj.lists.length }</Text>
+                        
                         <Text variant="tiny">state: { collectionObj.shared ? "public" : "private" }</Text>
+                        <FontAwesome5 
+                          name={collectionObj.shared ? "globe": "lock"} 
+                          color={collectionObj.shared ? "#2ecc71": "#f55"} 
+                          size={11} 
+                        />
                       </InfoContainer>
                     </CollectionBox>)
                   : <AddBox 
@@ -137,7 +134,11 @@ export function MyCollectionsComponents({ clusterParent, collections, createNew,
         onClose={setShowDialog}
         title="Delete collection" 
         content="Are you sure you want to delete this collection?" 
-        bottons={[DeleteButton, CancelButton]}
+        buttons={
+          [
+            <DeleteButton onPress ={() => onDeleteCollection(collectionId)} />,
+            <CancelButton onPress={() => setShowDialog(false)} />
+          ]}
       />
     </>
   );

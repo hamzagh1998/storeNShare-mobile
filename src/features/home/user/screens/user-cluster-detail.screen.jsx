@@ -37,7 +37,7 @@ export function UserClusterDetailScreen({ navigation }) {
       navigation.navigate("Create "+name, {id})
     };
   };
-  const updateCollection = params => navigation.navigate(
+  const onUpdateCollection = params => navigation.navigate(
     "Collection", 
     {
       screen: "Update collection", 
@@ -49,11 +49,12 @@ export function UserClusterDetailScreen({ navigation }) {
       screen: "My collection detail", 
       params: params
     });
-  const deleteCollection = async collectionId => {
+    
+  const onDeleteCollection = async collectionId => {
     setIsLoading(true);
-    const [error, data] = await tryToCatch(CollectionService.deleteCollectionService, token, collectionId);
-    if (error) {
-      setError(error);
+    const [err, data] = await tryToCatch(CollectionService.deleteCollectionService, token, collectionId);
+    if (err) {
+      setError(err);
       setIsLoading(false);
     } else if (data) {
       if (data.error) {
@@ -102,8 +103,8 @@ export function UserClusterDetailScreen({ navigation }) {
               myClusterData={myClusterData} 
               createNew={createNew} 
               onCollectionDetail={onCollectionDetail}
-              updateCollection={updateCollection}
-              deleteCollection={deleteCollection}
+              onUpdateCollection={onUpdateCollection}
+              onDeleteCollection={onDeleteCollection}
             />
       }
     </>

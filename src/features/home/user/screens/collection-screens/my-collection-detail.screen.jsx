@@ -11,17 +11,19 @@ import { LoadingIndicator } from "../../../../../components/loading-indicator/lo
 import { tryToCatch } from "../../../../../utils/try-to-catch";
 
 import { CollectionService } from "../../../../../services/collection/collectoin.service";
+import { ListService } from "../../../../../services/list/list.service";
+
 
 export function MyCollectionDetailScreen({ route, navigation }) {
 
   const isFocused = useIsFocused();
-
   const { collectionId } = route.params;
 
   const { token } = useContext(UserContext);
 
   const [myCollection, setMyCollection] = useState({lists: []});
   const [isLoading, setIsLoading] = useState(true);
+  const [reload, setreload] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -37,27 +39,73 @@ export function MyCollectionDetailScreen({ route, navigation }) {
           mounted && setError(err);
           mounted && setIsLoading(false);
         } else mounted && setMyCollection(data.detail);
-      }; mounted && setIsLoading(false);
+      }; 
+      mounted && setIsLoading(false);
+      mounted && setreload(false);
     };
 
-    loadData()
+    loadData();
     // clean up
     return () => mounted = false;
-  }, [isFocused]);
+  }, [isFocused, reload]);
 
-  const createNew = (name, id) => {
+  const createNew = (name, id, parentName=myCollection.name) => {
     navigation.navigate(
       "List",
       {
         screen: "Create "+name,
-        params: { id }
+        params: { id, parentName }
       }
     )
+  };
+
+  const onUpdateList = (listId, collectionParent, oldName, oldShared) => navigation.navigate(
+    "List", 
+    {
+      screen: "Update list",
+      params: {collectionName: myCollection.name, listId, collectionParent, oldName, oldShared}
+    }
+  );
+
+  const onCreateList = () => navigation.navigate(
+    "List",
+    {
+      screen: "Create list",
+      params: {id: myCollection._id, parentName: myCollection.name}
+    }
+  );
+
+  const onDeleteList = async listId => {
+    setIsLoading(true);
+    const [error, data] = await tryToCatch(ListService.deleteListService, token, listId);
+    if (error) {
+      setError(error);
+      setIsLoading(false);
+    } else if (data) {
+      if (data.error) {
+        setError(data.detail);
+        setIsLoading(false);
+      } else {
+        setError(null);
+        setIsLoading(false);
+      };
+    };setreload(true);
+    navigation.navigate(
+      "Collection",
+      {
+        screen: "My collection detail",
+        params: {collectionId: myCollection._id, name: myCollection.name}
+      }
+    );
   };
 
   const currentView = myCollection.lists.length
                         ? <MyCollectionDetailComponent 
                             myCollection={myCollection}
+                            onCreateList={onCreateList}
+                            onUpdateList={onUpdateList}
+                            onDeleteList={onDeleteList}
+                            error={error}
                           />
                         : <DontHaveComponent 
                             id={collectionId}
