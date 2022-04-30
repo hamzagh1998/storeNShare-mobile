@@ -13,7 +13,7 @@ import { LoadingIndicator } from "../../../../components/loading-indicator/loadi
 
 import { tryToCatch } from "../../../../utils/try-to-catch";
 
-export function UserClusterDetailScreen({ navigation }) {
+export function UserMainScreen({ navigation }) {
 
   const isFocused = useIsFocused();
 
@@ -92,7 +92,7 @@ export function UserClusterDetailScreen({ navigation }) {
     loadData();
     // clean up
     return () => mounted = false;
-  } ,[isFocused, error, reload]);
+  } ,[]);
   
   return (
     <>

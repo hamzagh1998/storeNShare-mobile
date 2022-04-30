@@ -2,32 +2,32 @@ import React, { useState,useContext } from "react";
 
 import { UserContext } from "../../../../../context/user.context";
 
-import { CreateListComponent } from "../../components/list-components/create-list.component";
+import { CreateItemComponent } from "../../components/item-components/create-item.component";
 
 import { LoadingIndicator } from "../../../../../components/loading-indicator/loading-indicator";
 
 import { tryToCatch } from "../../../../../utils/try-to-catch";
 
-import { ListService } from "../../../../../services/list/list.service";
+import { ItemService } from "../../../../../services/item/item.service";
 
 
-export function CreatListScreen({ route, navigation }) {
+export function CreateItemScreen({ route, navigation }) {
 
-  const { id, parentName } = route.params; // collection id
+  const { id, parentName } = route.params; // list id
 
   const { token } = useContext(UserContext);
 
-  const [name, setName] = useState("");
-  const [shared, setShared] = useState(true);
+  const [key, setKey] = useState("");
+  const [value, setValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const onCreateList = async () => {
+  const onCreateItem = async () => {
     setIsLoading(true);
     if (name.length) {
       const [error, data] = await tryToCatch(async (token, payload) => (
-        ListService.createListService(token, payload)
-      ), token, {listInfo: {collectionParent: id, name: name.toLowerCase().trim(), shared}});
+        ItemService.createItemService(token, payload)
+      ), token, {itemInfo: {listParent: id, key: key.toLowerCase().trim(), value: value.toLocaleLowerCase().trim}});
       if (error) {
         setError(error);
       }; if (data) {
@@ -45,13 +45,13 @@ export function CreatListScreen({ route, navigation }) {
       {
         isLoading
           ? <LoadingIndicator />
-          : <CreateListComponent 
-              name={name}
-              shared={shared}
+          : <CreateItemComponent 
+              key={key}
+              value={value}
               error={error}
-              setName={setName}
-              setShared={setShared}
-              onCreateList={onCreateList}
+              setKey={setKey}
+              setValue={setValue}
+              onCreateItem={onCreateItem}
             />
       }
     </>

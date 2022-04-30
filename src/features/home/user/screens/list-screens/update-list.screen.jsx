@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import { UserContext } from "../../../../../context/user.context";
 
-import { UpdateListComponent } from "../../components/list-components/update-list-component";
+import { UpdateListComponent } from "../../components/list-components/update-list.component";
 
 import { LoadingIndicator } from "../../../../../components/loading-indicator/loading-indicator";
 
@@ -40,7 +40,7 @@ export function UpdateListScreen({ route, navigation }) {
               params: {collectionId: collectionParent, name: collectionName}
             });
       }; 
-    } else setError("Please enter collection name!");
+    } else setError("Please enter list name!");
     setIsLoading(false);
   };
 

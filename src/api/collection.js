@@ -7,7 +7,7 @@ export class Collection {
 
   static async myCollectionDetail(token, collectionId) {
     const [error, res] = await tryToCatch(async (token, id) => (
-      axios.get("collection/my/"+id, {headers: {Authorization: "Bearer "+token}})
+      axios.get("/collection/my/"+id, {headers: {Authorization: "Bearer "+token}})
     ), token, collectionId);
     return requestHandler(error, res);
   };

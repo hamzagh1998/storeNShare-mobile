@@ -5,7 +5,9 @@ import { MyListsComponent } from "../list-components/my-lists.component";
 
 import { ViewContainer, Text } from "../../../../../components/utilities";
 
-export function MyCollectionDetailComponent({ myCollection, onCreateList, onUpdateList, onDeleteList, error }) {
+export function MyCollectionDetailComponent(
+  { myCollection, onCreateList, onListDetail,  onUpdateList, onDeleteList, error }
+  ) {
 
   const { lists, shared } = myCollection;
   const [checked, setChecked] = useState(false);
@@ -18,6 +20,7 @@ export function MyCollectionDetailComponent({ myCollection, onCreateList, onUpda
                               ? <Text variant="error">{ error }</Text> 
                               : <MyListsComponent 
                                   lists={lists} 
+                                  onListDetail={onListDetail}
                                   onCreateList={onCreateList}
                                   onUpdateList={onUpdateList} 
                                   onDeleteList={onDeleteList}

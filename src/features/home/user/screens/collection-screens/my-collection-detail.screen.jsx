@@ -47,7 +47,7 @@ export function MyCollectionDetailScreen({ route, navigation }) {
     loadData();
     // clean up
     return () => mounted = false;
-  }, [isFocused, reload]);
+  }, []);
 
   const createNew = (name, id, parentName=myCollection.name) => {
     navigation.navigate(
@@ -59,11 +59,19 @@ export function MyCollectionDetailScreen({ route, navigation }) {
     )
   };
 
-  const onUpdateList = (listId, collectionParent, oldName, oldShared) => navigation.navigate(
+  const onListDetail = params => navigation.navigate(
+    "List",
+    {
+      screen: "My list detail",
+      params: params
+    }
+  );
+
+  const onUpdateList = params => navigation.navigate(
     "List", 
     {
       screen: "Update list",
-      params: {collectionName: myCollection.name, listId, collectionParent, oldName, oldShared}
+      params: params
     }
   );
 
@@ -102,6 +110,7 @@ export function MyCollectionDetailScreen({ route, navigation }) {
   const currentView = myCollection.lists.length
                         ? <MyCollectionDetailComponent 
                             myCollection={myCollection}
+                            onListDetail={onListDetail}
                             onCreateList={onCreateList}
                             onUpdateList={onUpdateList}
                             onDeleteList={onDeleteList}

@@ -13,7 +13,15 @@ import { Dialog } from "../../../../../components/dialog/dialog";
 import { Text, Searchbar, AddBox, Image } from "../../../../../components/utilities";
 
 
-export function MyCollectionsComponents({ clusterParent, collections, createNew, onCollectionDetail, onUpdateCollection, onDeleteCollection }) {
+export function MyCollectionsComponents(
+  { 
+    clusterParent, 
+    collections, 
+    createNew, 
+    onCollectionDetail, 
+    onUpdateCollection, 
+    onDeleteCollection 
+  }) {
 
   const { userData: { avatar } } = useContext(UserContext);
 

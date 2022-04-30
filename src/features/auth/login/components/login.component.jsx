@@ -24,7 +24,7 @@ export function LoginComponent({emailOrUsername, password, error, setEmailOrUser
               value={emailOrUsername}
               placeholder="Enter your email or username"
               autoCapitalize="none"
-              onChangeText={value => setEmailOrUsername(value.toLocaleLowerCase().trim())}
+              onChangeText={value => setEmailOrUsername(value)}
             />
           </Spacer>
           <Spacer size="large">

@@ -9,7 +9,6 @@ import { ViewContainer, Text, TextInput, Button } from "../../../../../component
 
 export function UpdateListComponent({name, shared, error, setName, setShared, onUpdateList}) {
 
-
   return (
     <ViewContainer>
       <Spacer size="xxl" />

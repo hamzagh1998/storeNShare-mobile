@@ -33,7 +33,7 @@ export function LoginScreen({ navigation }) {
     };setError(null);
     const [err, data] = await tryToCatch(loginService, emailOrUsername.toLocaleLowerCase().trim(), password);
     if (err) {
-      setError(err);
+      setError(err.detail);
       setIsLoading(false);
     } else if (data.error) {
       setError(data.detail);
