@@ -92,7 +92,7 @@ export function UserMainScreen({ navigation }) {
     loadData();
     // clean up
     return () => mounted = false;
-  } ,[]);
+  } ,[isFocused, error, reload]);
   
   return (
     <>

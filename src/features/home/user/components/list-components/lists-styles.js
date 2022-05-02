@@ -15,7 +15,7 @@ export const RectangularContainer = styled.View`
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 10px;
-  background-color: #f7f7f7;
+  background-color: ${({theme}) => theme.colors.bg.trinary};
 `; 
 
 export const VerLine = styled.View`

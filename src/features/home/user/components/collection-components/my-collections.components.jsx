@@ -26,14 +26,14 @@ export function MyCollectionsComponents(
   const { userData: { avatar } } = useContext(UserContext);
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchRslt, setShearchRslt] = useState([]);
+  const [searchRslt, setSearchRslt] = useState([]);
   const [showDialog, setShowDialog] = useState(false);
   const [collectionId, setCollectionId] = useState(null);
 
-  useEffect(() => setShearchRslt([]), [searchQuery.length, collections.length]);
+  useEffect(() => setSearchRslt([]), [searchQuery.length, collections.length]);
 
   const onSubmitSearch = () => {
-    setShearchRslt(collections.filter(collection => 
+    setSearchRslt(collections.filter(collection => 
       collection.name.includes(searchQuery.toLocaleLowerCase().trim())
     ));
   };

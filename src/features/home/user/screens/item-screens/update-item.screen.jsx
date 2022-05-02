@@ -12,12 +12,12 @@ import { ItemService } from "../../../../../services/item/item.service";
 
 
 export function UpdateListScreen({ route, navigation }) {
-  const { listName, itemId, listParent, oldKey, oldValue } = route.params;
+  const { itemId, collectionId, listName, listParent, oldKey, oldValue } = route.params;
 
   const { token } = useContext(UserContext);
 
+  const [keyVal, setKeyVal] = useState(oldKey);
   const [value, setValue] = useState(oldValue);
-  const [key, setKey] = useState(oldKey);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -26,7 +26,7 @@ export function UpdateListScreen({ route, navigation }) {
     if (value.length) {
       const [error, data] = await tryToCatch(async (token, itemId, payload) => (
         await ItemService.updateItemService(token, itemId, payload)
-      ), token, itemId, {itemInfo: {key: key.toLowerCase().trim(), value: value.toLowerCase().trim(), listParent, }});
+      ), token, itemId, {itemInfo: {key: keyVal.toLowerCase().trim(), value: value.toLowerCase().trim(), listParent, }});
       if (error) {
         setError(error);
       }; if (data) {
@@ -37,7 +37,7 @@ export function UpdateListScreen({ route, navigation }) {
             "List", 
             {
               screen: "My list detail", 
-              params: {listId: listParent, name: listName}
+              params: {id: listParent, name: listName, collectionId}
             });
       }; 
     } else setError("Please enter item value!");
@@ -50,10 +50,10 @@ export function UpdateListScreen({ route, navigation }) {
         isLoading 
           ? <LoadingIndicator />
           : <UpdateItemComponent 
-              key={key}
+              keyVal={keyVal}
               value={value}
               error={error}
-              setKey={setKey}
+              setKeyVal={setKeyVal}
               setValue={setValue}
               onUpdateItem={onUpdateItem}          
             />

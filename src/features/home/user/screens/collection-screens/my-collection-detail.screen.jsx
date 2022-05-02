@@ -47,7 +47,7 @@ export function MyCollectionDetailScreen({ route, navigation }) {
     loadData();
     // clean up
     return () => mounted = false;
-  }, []);
+  }, [isFocused, reload]);
 
   const createNew = (name, id, parentName=myCollection.name) => {
     navigation.navigate(

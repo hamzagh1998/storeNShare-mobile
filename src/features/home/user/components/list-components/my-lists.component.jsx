@@ -68,7 +68,8 @@ export function MyListsComponent({ lists, onListDetail, onCreateList, onUpdateLi
                           onUpdateList(
                             {
                               listId: list._id, 
-                              collectionName: list.collectionParent, 
+                              collectionName: list.name,
+                              collectionParent: list.collectionParent, 
                               oldName: list.name, 
                               oldShared: list.shared
                             })}

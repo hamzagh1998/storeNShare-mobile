@@ -12,7 +12,6 @@ export function MyCollectionDetailComponent(
   const { lists, shared } = myCollection;
   const [checked, setChecked] = useState(false);
 
-
   const currentView = shared || checked
                         ? <ViewContainer>
                             {

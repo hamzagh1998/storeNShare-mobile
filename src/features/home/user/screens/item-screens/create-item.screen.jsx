@@ -13,30 +13,34 @@ import { ItemService } from "../../../../../services/item/item.service";
 
 export function CreateItemScreen({ route, navigation }) {
 
-  const { id, parentName } = route.params; // list id
+  const { id, collectionId, parentName } = route.params; // list id
 
   const { token } = useContext(UserContext);
 
-  const [key, setKey] = useState("");
+  const [keyVal, setKeyVal] = useState("");
   const [value, setValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const onCreateItem = async () => {
     setIsLoading(true);
-    if (name.length) {
+    if (keyVal.length && value.length) {
       const [error, data] = await tryToCatch(async (token, payload) => (
         ItemService.createItemService(token, payload)
-      ), token, {itemInfo: {listParent: id, key: key.toLowerCase().trim(), value: value.toLocaleLowerCase().trim}});
+      ), token, {itemInfo: {listParent: id, key: keyVal.toLowerCase().trim(), value: value.toLocaleLowerCase().trim()}});
       if (error) {
         setError(error);
       }; if (data) {
         if (data.error) {
           setError(data.detail.toString());
           setIsLoading(false);
-        } else navigation.navigate("Collection", {screen: "My collection detail", params: {collectionId: id, name: parentName}});
+        } else navigation.navigate(
+          "List", 
+          {
+            screen: "My list detail", params: {id, collectionId, name: parentName}
+          });
       }; 
-    } else setError("Please enter a list name!");
+    } else setError("Please fill out all fields!");
     setIsLoading(false);
   };
 
@@ -46,10 +50,10 @@ export function CreateItemScreen({ route, navigation }) {
         isLoading
           ? <LoadingIndicator />
           : <CreateItemComponent 
-              key={key}
+              keyVal={keyVal}
               value={value}
               error={error}
-              setKey={setKey}
+              setKeyVal={setKeyVal}
               setValue={setValue}
               onCreateItem={onCreateItem}
             />

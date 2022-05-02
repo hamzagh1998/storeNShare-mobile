@@ -39,6 +39,7 @@ export const light = {
   bg: {
     primary: "#EAEFF2",
     secondary: "#E7DED9",
+    trinary: "#f7f7f7;",
     error: "#D0421B",
     success: "#138000"
   },
