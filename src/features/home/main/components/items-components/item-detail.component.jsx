@@ -4,10 +4,11 @@ import { ScrollView } from "react-native";
 import { Spacer } from "../../../../../components/spacer/spacer";
 import { ViewContainer, Text } from "../../../../../components/utilities";
 
-import { MainContainer, RowContainer, MiniViewContainer, Hr, CurrentItemContainer } from "./item-styles";
+import { MainContainer, RowContainer, MiniViewContainer, Hr, CurrentItemContainer } from "../styles";
 
-export function MyItemDetailComponent({ currentItem, setCurrentItem, items }) {
-  
+
+export function ItemDetailComponent({currentItem, setCurrentItem, items}) {
+
   return (
     <ViewContainer>
       <MainContainer>
@@ -22,9 +23,13 @@ export function MyItemDetailComponent({ currentItem, setCurrentItem, items }) {
               item._id !== currentItem._id &&
                 <Spacer position="right" key={ item.id }>
                   <MiniViewContainer onPress={() => setCurrentItem(item)}>
-                    <Text>{ item.key }</Text>
+                    <Text variant="caption">
+                      { item.key.length < 15 ? item.key : item.key.slice(0, 12) + "..." }
+                    </Text>
                     <Spacer />
-                    <Text variant="tiny">{ item.value }</Text>
+                    <Text variant="tiny">
+                      { item.value.length < 30 ? item.value : item.value.slice(0, 27) + "..." }
+                    </Text>
                   </MiniViewContainer>
                 </Spacer> 
             ))

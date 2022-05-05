@@ -7,8 +7,15 @@ export class List {
 
   static async myListDetail(token, listId, payload) {
     const [error, res] = await tryToCatch(async (token, listId, collectionId) => (
-      axios.get("/list/my/"+listId, {params: collectionId}, {headers: {Authorization: "Bearer "+token}})
+      axios.post("/list/my/"+listId, collectionId, {headers: {Authorization: "Bearer "+token}})
     ), token, listId, payload);
+    return requestHandler(error, res);
+  };
+
+  static async listDetail(token, listId) {
+    const [error, res] = await tryToCatch(async (token, id) => (
+      axios.get("/list/"+id, {headers: {Authorization: "Bearer "+token}})
+    ), token, listId);
     return requestHandler(error, res);
   };
 

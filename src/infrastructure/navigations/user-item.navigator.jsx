@@ -5,7 +5,7 @@ import { CreateItemScreen } from "../../features/home/user/screens/item-screens/
 import { UpdateListScreen } from "../../features/home/user/screens/item-screens/update-item.screen";
 import { MyItemDetailDcreen } from "../../features/home/user/screens/item-screens/my-item-detail.screen";
 
-export function ItemNavigator() {
+export function UserItemNavigator() {
 
   const ItemStackNavigator = createNativeStackNavigator();
 

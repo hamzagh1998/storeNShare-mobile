@@ -3,9 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons"
 
+import { UserClusterNavigatior } from "./user-cluster.navigator";
 import { ClusterNavigatior } from "./cluster.navigator";
-
-import { MainScreen } from "../../features/home/main/screens/main.screen";
 import { SettingsScreen } from "../../features/home/settings/screens/settings.screen";
 
 
@@ -35,8 +34,8 @@ export function HomeNavigator() {
 
   return (
     <HomeTabNavigation.Navigator screenOptions={tabThemeHandler}>
-      <HomeTabNavigation.Screen name="User" component={ClusterNavigatior} />
-      <HomeTabNavigation.Screen name="Main" component={MainScreen} />
+      <HomeTabNavigation.Screen name="User" component={UserClusterNavigatior} />
+      <HomeTabNavigation.Screen name="Main" component={ClusterNavigatior} />
       <HomeTabNavigation.Screen name="Settings" component={SettingsScreen} />
     </HomeTabNavigation.Navigator>
   );

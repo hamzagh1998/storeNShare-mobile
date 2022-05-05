@@ -1,9 +1,12 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { UserMainScreen } from "../../features/home/user/screens/user-main.screen";
-import { CreateClusterScreen } from "../../features/home/user/screens/cluster-screens/create-cluster.screen";
-import { CollectionNavigator } from "./collection.navigator";
+import { MainScreen } from "../../features/home/main/screens/main.screen";
+import { ClusterDetailScreen } from "../../features/home/main/screens/cluster-screens/cluster-detail.screen"
+import { CollectionDetailScreen } from "../../features/home/main/screens/collection-screens/collection-detail.screen";
+import { ListDetailScreen } from "../../features/home/main/screens/list-screens/list-detail.screen";
+import { ItemDetailScreen } from "../../features/home/main/screens/item-screens/item-detail.screen";
+
 
 export function ClusterNavigatior() {
   const ClusterStackNavigator = createNativeStackNavigator();
@@ -13,18 +16,28 @@ export function ClusterNavigatior() {
       screenOptions={{headerBackButtonMenuEnabled: true}}
     >
       <ClusterStackNavigator.Screen 
-        name="My Cluster" 
-        component={UserMainScreen} 
+        name="Main cluster" 
+        component={MainScreen} 
         options={{headerShown: false}}
       />
-      <ClusterStackNavigator.Screen 
-        name="Create cluster" 
-        component={CreateClusterScreen} 
+      <ClusterStackNavigator.Screen
+        name="Cluster detail"
+        component={ClusterDetailScreen}
+        options={({ route }) => ({ title: route.params.name })}
+      />
+      <ClusterStackNavigator.Screen
+        name="Collection detail"
+        component={CollectionDetailScreen}
+        options={({ route }) => ({ title: route.params.name })}
+      />
+      <ClusterStackNavigator.Screen
+        name="List detail"
+        component={ListDetailScreen}
+        options={({ route }) => ({ title: route.params.name })}
       />
       <ClusterStackNavigator.Screen 
-        name="Collection"
-        component={CollectionNavigator}
-        options={{headerShown: false}}
+        name="Item detail"
+        component={ItemDetailScreen}
       />
     </ClusterStackNavigator.Navigator>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TouchableOpacity, ScrollView } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 
-import { MainContainer, RectangularContainer, VerLine, Container, RowConatiner, AddBtnContainer } from "./lists-styles";
+import { MainContainer, RectangularContainer, VerLine, Container, RowConatiner } from "./lists-styles";
 
 import { DeleteButton, CancelButton } from "../../../../generic-components/dialog-buttons";
 

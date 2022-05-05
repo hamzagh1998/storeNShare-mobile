@@ -14,14 +14,14 @@ export class Cluster {
 
   static async clusterDetail(token, clusterId) {
     const [error, res] = await tryToCatch(async (token, id) => (
-      axios.post("/cluster/"+id, {headers: {Authorization: "Bearer "+token}})
+      axios.get("/cluster/"+id, {headers: {Authorization: "Bearer "+token}})
       ), token, clusterId);
       return requestHandler(error, res);
   };
 
   static async allClusters(token) {
     const [error, res] = await tryToCatch(async token => (
-      axios.post("/cluster/all"+id, {headers: {Authorization: "Bearer "+token}})
+      axios.get("/cluster/all/", {headers: {Authorization: "Bearer "+token}})
       ), token);
       return requestHandler(error, res);
   };

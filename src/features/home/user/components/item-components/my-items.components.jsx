@@ -72,7 +72,7 @@ export function MyItemsComponents(
               itemArr.map(itemObj => (
                 itemObj.key.length
                   ?(<CollectionBox key={itemObj._id} onPress={() => 
-                                                    onItemDetail({item: itemObj, items})}
+                                                    onItemDetail({item: itemObj, name: itemObj.key, items})}
                     >
                       <RowContainer>
                         <TouchableOpacity 

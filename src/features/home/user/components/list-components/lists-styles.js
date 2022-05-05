@@ -5,7 +5,6 @@ export const MainContainer = styled.View`
   width: 100%;
   height: 100%;
   position: relative;
-  opacity: ${({visible}) => visible ? 0.1 : 1};
 `;
 
 export const RectangularContainer = styled.View`

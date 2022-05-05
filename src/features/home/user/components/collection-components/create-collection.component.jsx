@@ -2,7 +2,6 @@ import React from "react";
 import { View } from "react-native";
 import { Switch } from "react-native-paper";
 
-
 import { MainContainer, Container, RowContainer, FormContainer } from "../styles";
 
 import { Spacer } from "../../../../../components/spacer/spacer";

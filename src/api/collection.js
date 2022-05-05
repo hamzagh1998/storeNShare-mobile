@@ -12,10 +12,24 @@ export class Collection {
     return requestHandler(error, res);
   };
 
-  static async createCollection(token, payload) {
+  static async collectionDetail(token, collectionId) {
+    const [error, res] = await tryToCatch(async (token, id) => (
+      axios.get("/collection/"+id, {headers: {Authorization: "Bearer "+token}})
+    ), token, collectionId);
+    return requestHandler(error, res);
+  };
+
+  static async shareCollection(token, collectionId) {
+    const [error, res] = await tryToCatch(async (token, collectionId) => {
+      axios.get("/collection/share/"+collectionId, {headers: {Authorization: "Bearer "+token}})
+    }, token, collectionId);
+    return requestHandler(error, res);
+  };
+
+  static async createCollection(token, collectionInfo) {
     const [error, res] = await tryToCatch(async (token, collectionInfo) => (
       axios.post("/collection/create", collectionInfo, {headers: {Authorization: "Bearer "+token}})
-    ), token, payload);
+    ), token, collectionInfo);
     return requestHandler(error, res);
   };
   

@@ -4,9 +4,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CreatListScreen } from "../../features/home/user/screens/list-screens/create-list.screen";
 import { UpdateListScreen } from "../../features/home/user/screens/list-screens/update-list.screen";
 import { MyListDetailScreen } from "../../features/home/user/screens/list-screens/my-list-detail.screen";
-import { ItemNavigator } from "./item.navigator";
+import { UserItemNavigator } from "./user-item.navigator";
 
-export function ListNavigator() {
+export function UserListNavigator() {
   const ListStackNavigator = createNativeStackNavigator();
 
   return (
@@ -26,7 +26,7 @@ export function ListNavigator() {
       />
       <ListStackNavigator.Screen 
         name="Item"
-        component={ItemNavigator}
+        component={UserItemNavigator}
         options={{headerShown: false}}
       />
     </ListStackNavigator.Navigator>

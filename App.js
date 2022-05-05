@@ -19,7 +19,7 @@ export default function App() {
 
   const themes = {...theme, colors: theme.light};
 
-  axios.defaults.baseURL = "http://192.168.206.101:4000/api/v1";
+  axios.defaults.baseURL = "http://192.168.1.17:4000/api/v1";
   
   return (
     <>

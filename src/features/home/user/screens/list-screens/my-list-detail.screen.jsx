@@ -101,28 +101,29 @@ export function MyListDetailScreen({ route, navigation }) {
     () => mounted = false;
   }, [isFocused, reload]);
 
-  const currentView = myList.items.length 
-                        ? <MyListDetailComponent
-                            name={name}
-                            collectionId={collectionId}
-                            items={myList.items}
-                            createNew={createNew}
-                            onItemDetail={onItemDetail}
-                            onUpdateItem={onUpdateItem}
-                            onDeleteItem={onDeleteItem}
-                          />
-                        : <DontHaveComponent 
-                            id={myList._id}
-                            name="item" 
-                            createNew={createNew} 
-                          />
+  console.log(myList.items);
 
   return (
     <>
       {
         isLoading 
           ? <LoadingIndicator />
-          : currentView
+            : myList.items.length 
+              ? <MyListDetailComponent
+                  name={name}
+                  shared={myList.shared}
+                  collectionId={collectionId}
+                  items={myList.items}
+                  createNew={createNew}
+                  onItemDetail={onItemDetail}
+                  onUpdateItem={onUpdateItem}
+                  onDeleteItem={onDeleteItem}
+                />
+              : <DontHaveComponent 
+                  id={myList._id}
+                  name="item" 
+                  createNew={createNew} 
+                />
       }
     </>
   );

@@ -10,6 +10,7 @@ import { LoadingIndicator } from "../../components/loading-indicator/loading-ind
 import { SafeAreaContainer } from "../../components/utilities";
 
 export function Nvaigation() {
+  
   const { token, isLoading } = useContext(UserContext);
   const CurrentNavigation = () => token ? <HomeNavigator /> : <AuthNavigator />
 
