@@ -11,6 +11,8 @@ import { CollectionDetailComponent } from "../../components/collection-component
 import { tryToCatch } from "../../../../../utils/try-to-catch";
 
 import { CollectionService } from "../../../../../services/collection/collectoin.service";
+import { ClusterServie } from "../../../../../services/cluster/cluster.service";
+import { ListService } from "../../../../../services/list/list.service";
 
 
 export function CollectionDetailScreen({ route, navigation }) {
@@ -20,11 +22,24 @@ export function CollectionDetailScreen({ route, navigation }) {
 
   const { collectionId } = route.params;
 
-  const [collectioDetail, setCollectionDetail] = useState({lists: []});
+  const [collectionDetail, setCollectionDetail] = useState({lists: []});
+  const [clusterDetail, setClusterDetail] = useState({collections: []});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const onListDetail = params => navigation.navigate("List detail", params);
+
+  const onListShare = async (id, collectionId) => {
+    const [err, data] = await tryToCatch(ListService.listShareService, token, id, collectionId);
+    if (err || data.error) {
+      setError(err ? err : data.error);
+      setIsLoading(false);
+    } else {
+      setError(null);
+      setCollectionDetail(data.detail);
+      setIsLoading(false);
+    }; navigation.navigate("User", {screen: "My Cluster"})
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -39,9 +54,22 @@ export function CollectionDetailScreen({ route, navigation }) {
         mounted && setCollectionDetail(data.detail);
         mounted && setIsLoading(false);
       };
-    }
+    };
+
+    const getMyCluster = async () => {
+      const [err, data] = await tryToCatch(ClusterServie.myClusterService, token);
+      if (err || data.error) {
+        mounted && setError(err ? err : data.error);
+        mounted && setIsLoading(false);
+      } else {
+        mounted && setError(null);
+        mounted && setClusterDetail(data.detail);
+        mounted && setIsLoading(false);
+      };
+    };
     
     loadData();
+    getMyCluster();
     // clean up
     return () => mounted = false;
   }, []);
@@ -54,8 +82,10 @@ export function CollectionDetailScreen({ route, navigation }) {
         : error 
             ? <Text>{ error }</Text>
             : <CollectionDetailComponent 
-                lists={collectioDetail.lists}
+                lists={collectionDetail.lists}
+                collections={clusterDetail.collections}
                 onListDetail={onListDetail}
+                onListShare={onListShare}
               />
       }
     </ViewContainer>

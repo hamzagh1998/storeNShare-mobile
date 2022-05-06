@@ -69,11 +69,11 @@ export function ClusterDetailComponent({collections, onCollectionDetail, onShare
                         <InfoContainer>
                           <Text variant="tiny">lists: { collectionObj.lists.length }</Text>
                           <Spacer size="medium" />
-                          <TouchableOpacity 
+                          {/* <TouchableOpacity 
                             onPress={() => onShareCollection(collectionObj._id)}
                           >
                             <FontAwesome5 name="download" size={20} color="#7ed1d9" /> 
-                          </TouchableOpacity> 
+                          </TouchableOpacity>  */}
                         </InfoContainer>
                       </CollectionBox>)
                   ))

@@ -19,6 +19,13 @@ export class List {
     return requestHandler(error, res);
   };
 
+  static async listShare(token, id, payload) {
+    const [error, res] = await tryToCatch(async (token, id, collectionId) => {
+      axios.post("/list/share/"+id, {collectionId}, {headers: {Authorization: "Bearer "+token}});
+    }, token, id, payload);
+    return requestHandler(error, res);
+  };
+
   static async createList(token, payload) {
     const [error, res] = await tryToCatch(async (token, listInfo) => (
       axios.post("/list/create", listInfo, {headers: {Authorization: "Bearer "+token}})

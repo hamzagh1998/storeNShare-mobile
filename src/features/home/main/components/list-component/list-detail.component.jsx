@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 
-import { MainContainer, RowContainer, CollectionBox, InfoContainer, Centralizer } from "../styles";
+import { MainContainer, RowContainer, CollectionBox, Centralizer } from "../styles";
 
 import { Spacer } from "../../../../../components/spacer/spacer";
 import { Text, Searchbar } from "../../../../../components/utilities";
 
 export function ListDetailComponent({ items, onItemDetail }) {
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchRslt, setSearchRslt] = useState([]);
 
   useEffect(() => setSearchRslt([]), [searchQuery.length, items.length]);
@@ -34,8 +34,6 @@ export function ListDetailComponent({ items, onItemDetail }) {
   };
 
   !searchRslt.length ? fillItemList(items) : fillItemList(searchRslt);
-
-  console.log(itemsList.length);
 
   return (
     <>

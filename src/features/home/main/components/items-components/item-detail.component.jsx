@@ -12,30 +12,29 @@ export function ItemDetailComponent({currentItem, setCurrentItem, items}) {
   return (
     <ViewContainer>
       <MainContainer>
-        <RowContainer>
-          <ScrollView 
-            horizontal
-            style={{height: "100%"}} 
-            showsHorizontalScrollIndicator={false}
-          >   
-          {
-            items.map(item => (
-              item._id !== currentItem._id &&
-                <Spacer position="right" key={ item.id }>
-                  <MiniViewContainer onPress={() => setCurrentItem(item)}>
-                    <Text variant="caption">
-                      { item.key.length < 15 ? item.key : item.key.slice(0, 12) + "..." }
-                    </Text>
-                    <Spacer />
-                    <Text variant="tiny">
-                      { item.value.length < 30 ? item.value : item.value.slice(0, 27) + "..." }
-                    </Text>
-                  </MiniViewContainer>
-                </Spacer> 
-            ))
-          }
-          </ScrollView>
-        </RowContainer>
+        <ScrollView 
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        >   
+          <RowContainer>
+            {
+              items.map(item => (
+                item._id !== currentItem._id &&
+                  <Spacer position="right" key={ item.id }>
+                    <MiniViewContainer onPress={() => setCurrentItem(item)}>
+                      <Text variant="caption">
+                        { item.key.length < 15 ? item.key : item.key.slice(0, 12) + "..." }
+                      </Text>
+                      <Spacer />
+                      <Text variant="tiny">
+                        { item.value.length < 30 ? item.value : item.value.slice(0, 27) + "..." }
+                      </Text>
+                    </MiniViewContainer>
+                  </Spacer> 
+              ))
+            }
+          </RowContainer>
+        </ScrollView>
         <Spacer />
         <CurrentItemContainer>
           <Text variant="cover">{ currentItem.key }</Text>

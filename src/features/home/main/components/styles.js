@@ -3,10 +3,11 @@ import styled from "styled-components/native";
 export const MainContainer = styled.View`
   flex: 1;
   width: 100%;
+  opacity: ${({visible}) => visible ? 0.1 : 1};
 `;
 
 export const RowContainer = styled.View`
-  flex: 1;
+  /* flex: 1; */
   flex-direction: row;
 `;
 

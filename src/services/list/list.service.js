@@ -18,6 +18,13 @@ export class ListService {
     return { error: false, detail: data.detail};
   };
 
+  static async listShareService(token, id, collectionId) {
+    const [error, data] = await tryToCatch(List.listShare, token, id, collectionId);
+    if (error) return { error: true, detail: error};
+    if (data.error) return { error: true, detail: data.detail};
+    return { error: false, detail: data.detail};
+  };
+
   static async createListService(token, payload) {
     const [error, data] = await tryToCatch(List.createList, token, payload);
     if (error) return { error: true, detail: error};

@@ -101,8 +101,6 @@ export function MyListDetailScreen({ route, navigation }) {
     () => mounted = false;
   }, [isFocused, reload]);
 
-  console.log(myList.items);
-
   return (
     <>
       {

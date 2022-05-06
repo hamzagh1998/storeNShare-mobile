@@ -26,15 +26,15 @@ export function ClusterDetailScreen({ route, navigation }) {
   const onCollectionDetail = params => navigation.navigate("Collection detail", params);
 
   const onShareCollection = async collectionId => {
-    setIsLoading(true);
-    const [err, data] = await tryToCatch(CollectionService.shareCollectionService, token, collectionId);
-    if (err) {
-      setError(err);
-      setIsLoading(false);
-    } else if (data.error) {
-      setError(err);
-      setIsLoading(false);
-    }; navigation.navigate("User", {screen: "My Cluster"});
+    // setIsLoading(true);
+    // const [err, data] = await tryToCatch(CollectionService.shareCollectionService, token, collectionId);
+    // if (err) {
+    //   setError(err);
+    //   setIsLoading(false);
+    // } else if (data.error) {
+    //   setError(err);
+    //   setIsLoading(false);
+    // }; navigation.navigate("User", {screen: "My Cluster"});
   };
   
   useEffect(() => {
