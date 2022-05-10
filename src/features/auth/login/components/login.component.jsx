@@ -10,6 +10,7 @@ import { ViewContainer, Text, TextInput, Image, Button } from "../../../../compo
 import Logo from "../../../../../assets/icon.png";
 
 export function LoginComponent({emailOrUsername, password, error, setEmailOrUsername, setPassword, onLogin, onRegister}) {
+  
   return (
     <ViewContainer>
       <Spacer size="xxl">

@@ -127,8 +127,8 @@ export function MyCollectionsComponents(
                     </CollectionBox>)
                   : <AddBox 
                       key={Math.random(0, 1)}
-                      bgColor1="#e64a8d" 
-                      bgColor2="#ea619c" 
+                      bgColor1="#7f8c8d" 
+                      bgColor2="#95a5a6" 
                       onPress={() => createNew("collection", clusterParent)} />
               ))
             }

@@ -92,8 +92,13 @@ export function MyListsComponent({ lists, onListDetail, onCreateList, onUpdateLi
           }
           
         <Spacer position="top" size="xxl" />
+        <Spacer position="top" size="xl" />
         </ScrollView>
-        <AddCircle bgColor1="#27ae60" bgColor2="#2ecc71" onPress={onCreateList} />
+        <AddCircle 
+          bgColor1="#7f8c8d" 
+          bgColor2="#95a5a6"  
+          onPress={onCreateList} 
+        />
       </MainContainer>
       <Dialog 
       visible={showDialog}

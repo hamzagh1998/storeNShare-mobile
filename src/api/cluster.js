@@ -35,7 +35,7 @@ export class Cluster {
 
   static async updateCluster(token, payload) {
     const [error, res] = await tryToCatch(async (token, clusterInfo) => (
-      axios.put("/cluster/update", clusterInfo, {headers: {Authorization: "Bearer "+token}})
+      axios.put("/cluster/update", {clusterInfo}, {headers: {Authorization: "Bearer "+token}})
     ), token, payload);
     return requestHandler(error, res);
   };

@@ -2,7 +2,7 @@ import { Cluster } from "../../api/cluster";
 
 import { tryToCatch } from "../../utils/try-to-catch";
 
-export class ClusterServie {
+export class ClusterService {
 
   static async myClusterService(token) {
     const [error, data] = await tryToCatch(Cluster.myCluster, token);
@@ -27,6 +27,20 @@ export class ClusterServie {
 
   static async createClusterService(token, payload) {
     const [error, data] = await tryToCatch(Cluster.createCluster, token, payload);
+    if (error) return { error: true, detail: error};
+    if (data.error) return { error: true, detail: data.detail};
+    return { error: false, detail: data.detail};
+  };
+
+  static async updateClusterService(token, payload) {
+    const [error, data] = await tryToCatch(Cluster.updateCluster, token, payload);
+    if (error) return { error: true, detail: error};
+    if (data.error) return { error: true, detail: data.detail};
+    return { error: false, detail: data.detail};
+  };
+
+  static async deleteClusterService(token) {
+    const [error, data] = await tryToCatch(Cluster.deleteCluster, token);
     if (error) return { error: true, detail: error};
     if (data.error) return { error: true, detail: data.detail};
     return { error: false, detail: data.detail};

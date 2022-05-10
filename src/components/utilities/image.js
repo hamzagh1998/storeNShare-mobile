@@ -6,4 +6,4 @@ export const Image = styled.Image`
   border-radius: ${({rounded}) => rounded ? 50 : 0};
 `; 
 
-Image.defaultProps = { height: 120, width: 120, rounded: false };
+Image.defaultProps = { height: 100, width: 100, rounded: false };

@@ -11,7 +11,7 @@ import { CollectionDetailComponent } from "../../components/collection-component
 import { tryToCatch } from "../../../../../utils/try-to-catch";
 
 import { CollectionService } from "../../../../../services/collection/collectoin.service";
-import { ClusterServie } from "../../../../../services/cluster/cluster.service";
+import { ClusterService } from "../../../../../services/cluster/cluster.service";
 import { ListService } from "../../../../../services/list/list.service";
 
 
@@ -57,7 +57,7 @@ export function CollectionDetailScreen({ route, navigation }) {
     };
 
     const getMyCluster = async () => {
-      const [err, data] = await tryToCatch(ClusterServie.myClusterService, token);
+      const [err, data] = await tryToCatch(ClusterService.myClusterService, token);
       if (err || data.error) {
         mounted && setError(err ? err : data.error);
         mounted && setIsLoading(false);

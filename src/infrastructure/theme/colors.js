@@ -1,25 +1,32 @@
 export const dark = {
   text: {
-    primary: "#F5F5E9",
-    title: "#b2bec3",
+    primary: "#f5f6fa",
+    title: "#F8EFBA",
     disabled: "#9C9C9C",
+    link: "#192a56",
     error: "#D0421B",
     success: "#138000"
   },
   ui: {
-    primary: "#EAEAE0",
-    secondary: "#BDB5C0"
+    primary: "#7f8fa6",
+    secondary: "#4b6584",
+    disabled: "#9C9C9C"
   },
   bg: {
-    primary: "#1e272e",
-    secondary: "#0B1C47",
+    primary: "#2f3640",
+    secondary: "#2C3A47",
+    trinary: "#718093;",
     error: "#D0421B",
     success: "#138000"
   },
   bgButton: {
-    primary: "#A16AE8",
+    primary: "#25CCF7",
     secondary: "#E43480",
     disabled: "#9C9C9C"
+  },
+  tab: {
+    primary: "#1e2223",
+    secondary:"#718093"
   }
 };
 
@@ -32,8 +39,8 @@ export const light = {
     success: "#138000"
   },
   ui: {
-    primary: "#988780",
-    secondary: "#13292A",
+    primary: "#fff",
+    secondary: "#a5b1c2",
     disabled: "#9C9C9C"
   },
   bg: {
@@ -44,8 +51,12 @@ export const light = {
     success: "#138000"
   },
   bgButton: {
-    primary: "#A16AE8",
+    primary: "#25CCF7",
     secondary: "#E43480",
     disabled: "#9C9C9C"
+  },
+  tab: {
+    primary: "#fff",
+    secondary: "#a5b1c2",
   }
 };

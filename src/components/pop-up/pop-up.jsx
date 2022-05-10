@@ -16,7 +16,7 @@ const PopUpConatiner = styled.View`
   align-self: center;
   border-radius: 10px;
   border: 1px solid #ddd;
-  background-color: #f7f7f7;
+  background-color: ${({theme}) => theme.colors.bg.trinary};
 `;
 
 const Hr = styled.View`

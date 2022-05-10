@@ -30,6 +30,13 @@ export function UserContextProvider({ children }) {
     };setIsLoading(false);
   };
 
+  const setNewUserData = async value => {
+    const [error, _] = await tryToCatch(AsyncStorage.setItem, "@userData", JSON.stringify(value));
+    if (error) {
+      setError(error);
+    } else getUserData();
+  };
+
   useEffect(() => {
     getToken();
     getUserData();
@@ -37,7 +44,7 @@ export function UserContextProvider({ children }) {
 
   return (
     <UserContext.Provider 
-      value={{token, userData, isLoading, error, setToken, setUserData, getToken, getUserData}}
+      value={{token, userData, isLoading, error, setToken, setUserData, getToken, getUserData, setNewUserData}}
     >
       { children }
     </UserContext.Provider>

@@ -8,6 +8,7 @@ import { ClusterNavigatior } from "./cluster.navigator";
 import { SettingsScreen } from "../../features/home/settings/screens/settings.screen";
 
 
+
 export function HomeNavigator() {
   const HomeTabNavigation = createBottomTabNavigator();
 
@@ -23,12 +24,13 @@ export function HomeNavigator() {
     return {
       tabBarIcon: ({ focused, color, size }) => {
         const iconName = focused ? TAB_ICON[route.name][0]: TAB_ICON[route.name][1];
-        return <Ionicons name={iconName} size={size} color={color} />; // Tab Icon
+        return <Ionicons name={iconName} size={size+5} color={color} />; // Tab Icon
       },
-      tabBarActiveTintColor: theme.colors.ui.primary,
+      tabBarActiveTintColor: theme.colors.tab.secondary,
       tabBarInactiveTintColor: theme.colors.ui.disabled,
       tabBarShowLabel: false,
-      headerShown: false
+      headerShown: false,
+      tabBarStyle: {height: 60, backgroundColor: theme.colors.tab.primary}
     };
   };
 

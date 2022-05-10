@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 
 import { UserContext } from "../../../../../context/user.context";
 
-import { ClusterServie } from "../../../../../services/cluster/cluster.service";
+import { ClusterService } from "../../../../../services/cluster/cluster.service";
 
 import { CreateClusterComponent } from "../../components/cluster-components/create-cluster.component";
 
@@ -24,7 +24,7 @@ export function CreateClusterScreen({ navigation }) {
     setIsLoading(true);
     if (name.length) {
       const [error, data] = await tryToCatch(async (token, payload) => (
-        ClusterServie.createClusterService(token, payload)
+        ClusterService.createClusterService(token, payload)
       ), token, {clusterInfo: {name: name.toLowerCase().trim(), shared}});
       if (error) {
         setError(error);

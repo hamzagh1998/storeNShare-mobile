@@ -24,7 +24,7 @@ const body = theme => `
 const link = theme => `
     font-family: ${theme.fonts.body};
     font-size: ${theme.fontSizes.body};
-    color: #0c9bdc
+    color: ${theme.colors.text.link}
 `;
 
 

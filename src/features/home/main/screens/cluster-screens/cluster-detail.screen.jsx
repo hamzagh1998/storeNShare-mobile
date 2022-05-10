@@ -10,7 +10,7 @@ import { ClusterDetailComponent } from "../../components/cluster-components/clus
 
 import { tryToCatch } from "../../../../../utils/try-to-catch";
 
-import { ClusterServie } from "../../../../../services/cluster/cluster.service";
+import { ClusterService } from "../../../../../services/cluster/cluster.service";
 import { CollectionService } from "../../../../../services/collection/collectoin.service";
 
 export function ClusterDetailScreen({ route, navigation }) {
@@ -41,7 +41,7 @@ export function ClusterDetailScreen({ route, navigation }) {
     let mounted = true;
 
     const loadData = async () => {
-      const [err, data] = await tryToCatch(ClusterServie.clusterDetailService, token, clusterId);
+      const [err, data] = await tryToCatch(ClusterService.clusterDetailService, token, clusterId);
       if (err || data.error) {
         mounted && setError(err ? err : data.error);
         mounted && setIsLoading(false);

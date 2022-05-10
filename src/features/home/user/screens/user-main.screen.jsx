@@ -3,7 +3,7 @@ import { useIsFocused } from '@react-navigation/native';
 
 import { UserContext } from "../../../../context/user.context";
 
-import { ClusterServie } from "../../../../services/cluster/cluster.service";
+import { ClusterService } from "../../../../services/cluster/cluster.service";
 import { CollectionService } from "../../../../services/collection/collectoin.service";
 import { logoutService } from "../../../../services/auth/logout.service";
 
@@ -71,7 +71,7 @@ export function UserMainScreen({ navigation }) {
   useEffect(() => {
     let mounted = true;
     const loadData = async () => {
-      const data = await ClusterServie.myClusterService(token);
+      const data = await ClusterService.myClusterService(token);
       if (data) {
         if (data.error) {
           mounted && setError(data.detail);

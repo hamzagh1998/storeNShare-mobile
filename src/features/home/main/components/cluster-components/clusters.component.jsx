@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { ScrollView, TouchableOpacity } from "react-native";
-import { FontAwesome5 } from '@expo/vector-icons';
+import React, { useState, useEffect, useContext } from "react";
+import { ScrollView } from "react-native";
+
+import { UserContext } from "../../../../../context/user.context";
 
 import { MainContainer, RowContainer, CollectionBox, InfoContainer, Centralizer } from "../styles";
 
@@ -10,7 +11,9 @@ import { Text, Searchbar } from "../../../../../components/utilities";
 
 export function ClustersComponent({ clusters, onClusterDetail }) {
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const { userData } = useContext(UserContext);
+
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchRslt, setSearchRslt] = useState([]);
 
   useEffect(() => setSearchRslt([]), [searchQuery.length, clusters.length]);
@@ -59,6 +62,7 @@ export function ClustersComponent({ clusters, onClusterDetail }) {
               <RowContainer key={Math.random(0, 1)}>
                 {
                   clusterArr.map(clusterObj => (
+                    userData.cluster !== clusterObj._id &&
                     (<CollectionBox key={clusterObj._id} onPress={() => onClusterDetail(
                       {
                         clusterId: clusterObj._id, 
@@ -74,8 +78,8 @@ export function ClustersComponent({ clusters, onClusterDetail }) {
                         <Spacer size="medium" />
                       </InfoContainer>
                     </CollectionBox>)
-                ))
-              }
+                  ))
+                }
             </RowContainer>
           ))
           : <Centralizer>

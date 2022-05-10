@@ -5,7 +5,7 @@ import { Text } from "react-native";
 import { UserContext } from "../../../../context/user.context";
 
 import { logoutService } from "../../../../services/auth/logout.service";
-import { ClusterServie } from "../../../../services/cluster/cluster.service";
+import { ClusterService } from "../../../../services/cluster/cluster.service";
 
 import { ClustersComponent } from "../components/cluster-components/clusters.component";
  
@@ -25,7 +25,7 @@ export function MainScreen({navigation}) {
   useEffect(() => {
     let mounted = true;
     const loadData = async () => {
-      const data = await ClusterServie.allClustersService(token);
+      const data = await ClusterService.allClustersService(token);
       if (data) {
         if (data.error) {
           mounted && setError(data.detail);

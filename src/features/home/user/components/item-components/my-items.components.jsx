@@ -110,8 +110,8 @@ export function MyItemsComponents(
                     </CollectionBox>)
                   : <AddBox 
                       key={Math.random(0, 1)}
-                      bgColor1="#4b6584" 
-                      bgColor2="#778ca3" 
+                      bgColor1="#7f8c8d" 
+                      bgColor2="#95a5a6"  
                       onPress={() => createNew("item")} 
                     />
               ))
