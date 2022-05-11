@@ -19,18 +19,14 @@ import { tryToCatch } from "../../../../utils/try-to-catch";
 
 export function SettingsScreen() {
 
-  const { token, setToken, setUserData, setNewUserData, userData: { username, email, avatar } } = useContext(UserContext);
+  const { token, setToken, setUserData, setNewUserData, userData } = useContext(UserContext);
   
   const isFocused = useIsFocused();
 
-  const [profileChecked, setProfileChecked] = useState(false);
-  const [passwordChecked, setPasswordChecked] = useState(false);
-  const [deleteAccountChecked, setDeleteAccountChecked] = useState(false);
-  const [deleteClusterChecked, setDeleteClusterChecked] = useState(false);
   const [reload, setReload] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentUsername, setCurrentUsername] = useState(username);
-  const [currentEmail, setCurrentEmail] = useState(email);
+  const [currentUsername, setCurrentUsername] = useState(userData.username ? userData.username : null);
+  const [currentEmail, setCurrentEmail] = useState(userData.email ? userData.email : null);
   const [clusterData, setClusterData] = useState({});
   const [error, setError] = useState(null);
 
@@ -41,24 +37,20 @@ export function SettingsScreen() {
       if (res.error) setError(res.detail);
       else {
         setToken(null);
-        setUserData(null);
+        setUserData({});
       };
     }; return () => mounted = false;
   };
 
   const onEditProfile = async () => {
-    if (profileChecked) {
       setIsLoading(true);
       const [err, data] = await tryToCatch(
-        UserService.editProfileService, token, {username: currentUsername, email: currentEmail});
-      console.log(data);
+        UserService.editProfileService, token, {username: currentUsername, email: currentEmail}
+      );
       if (err || data.error) setError(err ? error : data.error);
       else setNewUserData(data.detail);
       setReload(true);
       setIsLoading(false);
-    } else {
-      return <CheckPasswords text="Edit profile" setChecked={setProfileChecked} />
-    }
   };
 
   const onEditCluster = async payload => {
@@ -81,16 +73,24 @@ export function SettingsScreen() {
     setIsLoading(true);
     const [err, data] = await tryToCatch(UserService.deleteUserAccountService, token);
     if (err || data.error) setError(err ? error : data.error);
-    else setReload(true);
-    setIsLoading(false);
+    else {
+      logoutService();
+      setToken(null);
+      setUserData({});
+    }
   };
 
   const onDeleteUserCluster = async () => {
     setIsLoading(true);
     const [err, data] = await tryToCatch(ClusterService.deleteClusterService, token);
     if (err || data.error) setError(err ? error : data.error);
-    else setReload(true);
+    else { 
+      setUserData({ ...userData, cluster: null });
+      setClusterData({});
+    }
+    setReload(true);
     setIsLoading(false); 
+    
   };
 
   useEffect(() => {
@@ -100,11 +100,9 @@ export function SettingsScreen() {
       const [err, data] = await tryToCatch(ClusterService.myClusterService, token);
       if (err || data.error) {
         mounted && setError(err ? error : data.error);
-        mounted && setIsLoading(false)
-      } else {
+      } else if (data.detail) {
         mounted && setClusterData(data.detail);
-        mounted && setIsLoading(false)
-      };
+      };setIsLoading(false)
       setReload(false);
     };
 
@@ -126,7 +124,7 @@ export function SettingsScreen() {
               currentEmail={currentEmail}
               setCurrentEmail={setCurrentEmail}
               setCurrentUsername={setCurrentUsername}
-              avatar={avatar}
+              avatar={userData.avatar ? userData.avatar : null}
               onLogout={onLogout} 
               onEditProfile={onEditProfile}
               onEditCluster={onEditCluster}

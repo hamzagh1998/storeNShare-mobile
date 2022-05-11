@@ -33,7 +33,7 @@ export function MainScreen({navigation}) {
           if (res.error && mounted) setError(res.detail);
           else {
             setToken(null);
-            setUserData(null);
+            setUserData({});
           };
         } else {
           mounted && setClusters(data.detail ? data.detail : {});

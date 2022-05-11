@@ -79,7 +79,7 @@ export function UserMainScreen({ navigation }) {
           if (res.error && mounted) setError(res.detail);
           else {
             setToken(null);
-            setUserData(null);
+            setUserData({});
           };
         } else {
           mounted && setMyClusterData(data.detail ? data.detail : {});

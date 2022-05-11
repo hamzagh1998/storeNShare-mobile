@@ -8,7 +8,7 @@ export const AddBtnContainer = styled.View`
   border-radius: 50px;
   position: absolute;
   top: 85%;
-  right: 5%;
+  right: 0;
 `;
 
 export function AddCircle({bgColor1, bgColor2, onPress}) {

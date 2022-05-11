@@ -21,7 +21,7 @@ export class User {
 
   static async deleteUserAccount(token) {
     const [error, data] = await tryToCatch(async token => (
-      await axios.delete("/user/danger", {headers: {Authorization: "Bearer "+token}})
+      await axios.delete("/user/delete-user-account", {headers: {Authorization: "Bearer "+token}})
     ), token);
     return requestHandler(error, data);
   };

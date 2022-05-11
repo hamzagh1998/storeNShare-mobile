@@ -96,36 +96,40 @@ export function SettingComponent(
             }
           </List.Accordion>
           {/* Edit Cluster */}
-          <List.Accordion
-            style={{backgroundColor: colors.ui.primary}}
-            title="Edit Cluster"
-            left={props => <List.Icon {...props} icon="collapse-all" />}
-            expanded={expandedPrivacy}
-            onPress={() => setExpandedPrivacy(!expandedPrivacy)}
-          >
-            <RowContainer>
-              <Text variant="label">Public:</Text>
-              <Switch value={shared} onValueChange={() => setShared(!shared)} />
-            </RowContainer>
-            <TextInput 
-              label="Cluster name"
-              value={clusterName} 
-              placeholder="Enter your cluster name" 
-              onChangeText={value => setClusterName(value)}
-            />
-            { 
-              ((clusterName !== clusterData.name || shared !== clusterData.shared) && clusterName.length)
-                ? <Button 
-                    icon="update" 
-                    mode="contained" 
-                    size="small" 
-                    onPress={() => onEditCluster({name: clusterName, shared})}
-                  >
-                    Update
-                  </Button>
-                : null
-            }
-          </List.Accordion>
+          {
+            clusterName
+              ? <List.Accordion
+                  style={{backgroundColor: colors.ui.primary}}
+                  title="Edit Cluster"
+                  left={props => <List.Icon {...props} icon="collapse-all" />}
+                  expanded={expandedPrivacy}
+                  onPress={() => setExpandedPrivacy(!expandedPrivacy)}
+                >
+                  <RowContainer>
+                    <Text variant="label">Public:</Text>
+                    <Switch value={shared} onValueChange={() => setShared(!shared)} />
+                  </RowContainer>
+                  <TextInput 
+                    label="Cluster name"
+                    value={clusterName} 
+                    placeholder="Enter your cluster name" 
+                    onChangeText={value => setClusterName(value)}
+                  />
+                  { 
+                    ((clusterName !== clusterData.name || shared !== clusterData.shared) && clusterName.length)
+                      ? <Button 
+                          icon="update" 
+                          mode="contained" 
+                          size="small" 
+                          onPress={() => onEditCluster({name: clusterName, shared})}
+                        >
+                          Update
+                        </Button>
+                      : null
+                  }
+                </List.Accordion>
+              : null
+          }
           {/* change password */}
           <List.Accordion
             style={{backgroundColor: colors.ui.primary}}
@@ -179,14 +183,19 @@ export function SettingComponent(
             expanded={expandedDanger}
             onPress={() => setExpandedDanger(!expandedDanger)}
           >
-            <PaperButton 
-              icon="trash-can" 
-              mode="text" 
-              color={colors.bgButton.secondary} 
-              onPress={onDeleteUserCluster}
-            >
-              Delete Cluster
-            </PaperButton>
+            {
+              clusterName && 
+              (
+                <PaperButton 
+                  icon="trash-can" 
+                  mode="text" 
+                  color={colors.bgButton.secondary} 
+                  onPress={onDeleteUserCluster}
+                >
+                  Delete Cluster
+                </PaperButton>
+              )
+            }
             <Spacer />
             <PaperButton 
               icon="trash-can" 

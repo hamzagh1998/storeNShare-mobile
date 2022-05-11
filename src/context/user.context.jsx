@@ -7,7 +7,7 @@ export const UserContext = createContext();
 
 export function UserContextProvider({ children }) {
   const [token, setToken] = useState(null);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
