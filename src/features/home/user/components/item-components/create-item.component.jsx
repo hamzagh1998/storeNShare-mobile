@@ -19,16 +19,16 @@ export function CreateItemComponent({keyVal, value, error, setKeyVal, setValue, 
           <ScrollView width="100%">
             <FormContainer>
               <TextInput 
-                label="Key"
-                placeholder="Enter the Key"
+                label="Item name"
+                placeholder="Enter the item name"
                 value={keyVal}
                 autoCapitalize="none"
                 onChangeText={value => setKeyVal(value)}
               />
               <Spacer />
               <PaperTextInput 
-                label="Value"
-                placeholder="Enter the value"
+                label="Description"
+                placeholder="Enter the description"
                 multiline={true}
                 numberOfLines={6}
                 style={{width: "100%"}}

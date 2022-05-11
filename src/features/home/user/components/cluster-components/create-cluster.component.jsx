@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Switch } from "react-native-paper";
-
-import { UserContext } from "../../../../../context/user.context";
 
 import { MainContainer, Container, RowContainer, FormContainer } from "../styles";
 
@@ -9,9 +7,7 @@ import { Spacer } from "../../../../../components/spacer/spacer";
 import { ViewContainer, Text, TextInput, Button } from "../../../../../components/utilities";
 
 export function CreateClusterComponent({name, shared, error, setName, setShared, onCreateCluster}) {
-  
-  const { userData } = useContext(UserContext);
-  if (userData.username) setName(`${userData.username}'s cluster`);
+    
 
   return (
     <ViewContainer>

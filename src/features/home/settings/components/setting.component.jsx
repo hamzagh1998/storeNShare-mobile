@@ -97,7 +97,7 @@ export function SettingComponent(
           </List.Accordion>
           {/* Edit Cluster */}
           {
-            clusterName
+            (typeof clusterName === "string")
               ? <List.Accordion
                   style={{backgroundColor: colors.ui.primary}}
                   title="Edit Cluster"

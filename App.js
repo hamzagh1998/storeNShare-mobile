@@ -18,9 +18,7 @@ export default function App() {
 
   if (!cabindLoaded || !latoLoaded) return null;
 
-  const themes = {...theme, colors: theme.light};
-
-  axios.defaults.baseURL = "http://192.168.1.19:4000/api/v1";
+  axios.defaults.baseURL = "your api service uri";
   
   return (
     <>   

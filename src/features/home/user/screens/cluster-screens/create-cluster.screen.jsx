@@ -12,9 +12,9 @@ import { tryToCatch } from "../../../../../utils/try-to-catch";
 
 export function CreateClusterScreen({ navigation }) {
 
-  const {token} = useContext(UserContext);
+  const {token, userData} = useContext(UserContext);
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState(`${userData.username}'s cluster`);
   const [shared, setShared] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
